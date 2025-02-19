@@ -1,10 +1,10 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify,render_template
 from geopy.geocoders import Nominatim
 import numpy as np
 import pandas as pd
 import joblib
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', template_folder='templates')
 
 def get_lat_lon_if_india(location):
     geolocator = Nominatim(user_agent="geo_locator")
@@ -67,7 +67,9 @@ def predict():
     "AQI Status": str(aqi_status)  # Ensure it's a string
 })
 
-
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 if __name__ == "__main__":
     app.run(debug=True)

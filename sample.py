@@ -92,11 +92,17 @@ try:
     # Save Model
     with open("air_quality_model.pkl", "wb") as f:
         pickle.dump(best_xgb, f)
-
- # Change "main" if using another branch
-
-    # Save Scaler
+    
+        # Save Scaler
     joblib.dump(sc, "scaler.pkl")
+
+    os.system("git config --global user.email 'github-actions@github.com'")
+    os.system("git config --global user.name 'GitHub Actions'")
+    os.system("git add air_quality_model.pkl scaler.pkl")
+    os.system("git commit -m 'Update air quality model'")
+    os.system("git push origin main")  # Change "main" if using another branch
+
+
     
 except Exception as e:
     print(f"An error occurred: {e}")
