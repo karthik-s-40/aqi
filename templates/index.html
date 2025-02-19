@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Air Quality Prediction</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="particles-container" id="particles-container"></div>
+
+    <header>
+        <h1>Air Quality Prediction</h1>
+        <p class="tagline">Breathe easy with accurate forecasts and personalized recommendations for your local air quality</p>
+    </header>
+
+    <main>
+        <div class="prediction-card">
+            <h2>Predict Air Quality</h2>
+            <form id="prediction-form">
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input 
+                        type="text" 
+                        id="location" 
+                        name="location" 
+                        placeholder="Enter your location (e.g., City, State)"
+                        required
+                        class="location-input"
+                    >
+                </div>
+                <div class="form-group">
+                    <label for="pollutant">Pollutant of Interest</label>
+                    <select id="pollutant" required>
+                        <option value="" disabled selected>Select pollutant</option>
+                        <option value="pm25">PM2.5 (Fine Particulate Matter)</option>
+                        <option value="pm10">PM10 (Coarse Particulate Matter)</option>
+                        <option value="o3">O₃ (Ozone)</option>
+                        <option value="no2">NO₂ (Nitrogen Dioxide)</option>
+                        <option value="so2">SO₂ (Sulfur Dioxide)</option>
+                        <option value="co">CO (Carbon Monoxide)</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">
+                    <i class="fas fa-chart-line"></i> Predict Air Quality
+                </button>
+            </form>
+        </div>
+
+        <!-- Rest of the HTML remains the same -->
+        <div class="result-section" id="result-section">
+            <h2>Your Prediction Result</h2>
+            <div class="result-card">
+                <p>Air Quality Index for <span id="location-display">selected location</span>:</p>
+                <div class="aqi-value" id="aqi-value">45</div>
+                <p class="aqi-description" id="aqi-description">Good - Air quality is satisfactory, and air pollution poses little or no risk.</p>
+                
+                <div class="scale-container">
+                    <div class="scale-marker" id="scale-marker"></div>
+                </div>
+                
+                <div class="recommendation-section">
+                    <p class="recommendation-title">Recommendations:</p>
+                    <ul id="recommendations">
+                        <li>You can enjoy outdoor activities.</li>
+                        <li>Air quality is ideal for most individuals, but some unusually sensitive people should consider reducing prolonged outdoor exertion.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <h2 class="info-title">Understanding Air Pollutants</h2>
+            <p>Air quality is affected by various pollutants, each with different sources and health impacts. Below are the major pollutants we monitor:</p>
+            
+            <div class="pollutant-grid">
+                <div class="pollutant-card">
+                    <h3>PM2.5</h3>
+                    <p>Fine particulate matter smaller than 2.5 micrometers. These tiny particles can penetrate deep into the lungs and even enter the bloodstream, causing respiratory and cardiovascular issues.</p>
+                </div>
+                
+                <div class="pollutant-card">
+                    <h3>PM10</h3>
+                    <p>Coarse particulate matter between 2.5 and 10 micrometers. These particles can cause irritation to the eyes, nose, and throat, and may worsen existing respiratory conditions.</p>
+                </div>
+                
+                <div class="pollutant-card">
+                    <h3>Ozone (O₃)</h3>
+                    <p>Ground-level ozone forms when pollutants from vehicles and industry react in sunlight. It can trigger asthma attacks, reduce lung function, and cause respiratory inflammation.</p>
+                </div>
+                
+                <div class="pollutant-card">
+                    <h3>Nitrogen Dioxide (NO₂)</h3>
+                    <p>A gas produced during combustion processes, especially in vehicles and power plants. It can irritate airways and increase susceptibility to respiratory infections.</p>
+                </div>
+                
+                <div class="pollutant-card">
+                    <h3>Sulfur Dioxide (SO₂)</h3>
+                    <p>A gas produced from burning fossil fuels containing sulfur. It can cause respiratory symptoms and make breathing difficult for those with asthma.</p>
+                </div>
+                
+                <div class="pollutant-card">
+                    <h3>Carbon Monoxide (CO)</h3>
+                    <p>A colorless, odorless gas produced by incomplete combustion. It reduces oxygen delivery to the body's organs and can be fatal at high concentrations.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <div class="footer-links">
+                <a href="#">About Us</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+            </div>
+            <p>© 2025 Air Quality Prediction. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

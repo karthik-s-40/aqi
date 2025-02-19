@@ -1,0 +1,41 @@
+name: Run Daily Python Script
+
+on:
+  schedule:
+    - cron: '0 18 * * *'  # 12:00 AM IST (6:30 PM UTC previous day)
+    - cron: '30 0 * * *'  # 6:00 AM IST (12:30 AM UTC)
+    - cron: '30 6 * * *'  # 12:00 PM IST (6:30 AM UTC)
+    - cron: '30 12 * * *' # 6:00 PM IST (12:30 PM UTC)
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set Up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'  
+
+      - name: Install Dependencies
+        run: pip install requests numpy pandas scikit-learn==1.6.1 xgboost joblib schedule
+
+      - name: Run Python Script
+        run: python cron/sample.py
+
+      - name: Configure Git
+        run: |
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git remote set-url origin https://x-access-token:${{ secrets.HUB_TOKEN }}@github.com/${{ github.repository }}.git
+
+      - name: Commit and push updated model
+        run: |
+          git add Backend/air_quality_model.pkl Backend/scaler.pkl
+          git commit -m "Update air quality model and scaler"
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.HUB_TOKEN }}
