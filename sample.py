@@ -98,10 +98,9 @@ try:
 
     os.system("git config --global user.email 'github-actions@github.com'")
     os.system("git config --global user.name 'GitHub Actions'")
-    os.system("git add air_quality_model.pkl scaler.pkl")
-    os.system("git commit -m 'Update air quality model'")
-    os.system("git push origin main")  # Change "main" if using another branch
-
+    os.system('git add "air_quality_model.pkl" "scaler.pkl"')  # Enclose filenames in quotes
+    os.system('git commit -m "Update air quality model"')
+    os.system("git push origin main")
 
     
 except Exception as e:

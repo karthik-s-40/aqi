@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Air Quality Prediction</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div class="particles-container" id="particles-container"></div>
@@ -53,19 +53,18 @@
             <h2>Your Prediction Result</h2>
             <div class="result-card">
                 <p>Air Quality Index for <span id="location-display">selected location</span>:</p>
-                <div class="aqi-value" id="aqi-value">45</div>
-                <p class="aqi-description" id="aqi-description">Good - Air quality is satisfactory, and air pollution poses little or no risk.</p>
+                
+                <!-- Min, Max, and Avg AQI Display -->
+                <div class="aqi-values">
+                    <p id="aqi-min">Min AQI: --</p>
+                    <p id="aqi-max">Max AQI: --</p>
+                    <p class="aqi-value" id="aqi-value">Avg AQI: --</p>
+                </div>
+        
+                <p class="aqi-description" id="aqi-description">--</p>
                 
                 <div class="scale-container">
                     <div class="scale-marker" id="scale-marker"></div>
-                </div>
-                
-                <div class="recommendation-section">
-                    <p class="recommendation-title">Recommendations:</p>
-                    <ul id="recommendations">
-                        <li>You can enjoy outdoor activities.</li>
-                        <li>Air quality is ideal for most individuals, but some unusually sensitive people should consider reducing prolonged outdoor exertion.</li>
-                    </ul>
                 </div>
             </div>
         </div>
@@ -126,6 +125,6 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

@@ -35,6 +35,8 @@ def predict():
     pollut = data.get("pollutant").strip().upper()
     
     coordinates = get_lat_lon_if_india(location)
+    if pollut in ["PM2.5", "PM25"]:  # ✅ Handle cases where "." might be removed
+        pollut = "PM2.5"
     if not coordinates:
         return jsonify({"error": "Location not found in India"}), 400
     
