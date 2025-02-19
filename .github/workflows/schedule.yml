@@ -24,7 +24,7 @@ jobs:
         run: pip install requests numpy pandas scikit-learn==1.6.1 xgboost joblib schedule
 
       - name: Run Python Script
-        run: python cron/sample.py
+        run: python sample.py
 
       - name: Configure Git
         run: |
@@ -34,7 +34,7 @@ jobs:
 
       - name: Commit and push updated model
         run: |
-          git add Backend/air_quality_model.pkl Backend/scaler.pkl
+          git add air_quality_model.pkl scaler.pkl
           git commit -m "Update air quality model and scaler"
           git push origin main
         env:
