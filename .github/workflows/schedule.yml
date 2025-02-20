@@ -6,7 +6,7 @@ on:
     - cron: '30 0 * * *'  # 6:00 AM IST (12:30 AM UTC)
     - cron: '30 6 * * *'  # 12:00 PM IST (6:30 AM UTC)
     - cron: '30 12 * * *' # 6:00 PM IST (12:30 PM UTC)
-
+ 
 jobs:
   run-script:
     runs-on: ubuntu-latest
