@@ -6,11 +6,11 @@ on:
     - cron: '30 0 * * *'  # 6:00 AM IST (12:30 AM UTC)
     - cron: '30 6 * * *'  # 12:00 PM IST (6:30 AM UTC)
     - cron: '30 12 * * *' # 6:00 PM IST (12:30 PM UTC)
- 
+
 jobs:
   run-script:
     runs-on: ubuntu-latest
- 
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -35,7 +35,10 @@ jobs:
       - name: Commit and push updated model
         run: |
           git add air_quality_model.pkl scaler.pkl
-          git commit -m "Update air quality model and scaler"
-          git push origin main
+          if ! git diff-index --quiet HEAD; then
+            git commit -m "Update air quality model and scaler"
+            git push origin main
+          else
+            echo "No changes to commit"
         env:
           GITHUB_TOKEN: ${{ secrets.HUB_TOKEN }}
