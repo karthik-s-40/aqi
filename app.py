@@ -60,7 +60,42 @@ def predict():
     predicted_df = pd.DataFrame(prediction, columns=att)
     avg_pollutant = predicted_df["Average Pollutant level"].iloc[0]
     
-    aqi_status = "Unhealthy" if  format(predicted_df["Maximum Pollutant level"].iloc[0], ".2f") > 100 else "Satisfactory" if format(predicted_df["Minimum Pollutant level"].iloc[0], ".2f") else "Healthy"
+    max_pollutant = float(predicted_df["Maximum Pollutant level"].iloc[0])
+    min_pollutant = float(predicted_df["Minimum Pollutant level"].iloc[0])
+    avg_pollutant = float(predicted_df["Average Pollutant level"].iloc[0])
+
+    def get_aqi_status(value):
+        if value <= 50:
+            return "Good"
+        elif 51 <= value <= 100:
+            return "Moderate"
+        elif 101 <= value <= 200:
+          return "Unhealthy for Sensitive Groups"
+        elif 201 <= value <= 300:
+           return "Unhealthy"
+        elif 301 <= value <= 400:
+            return "Very Unhealthy"
+        else:
+         return "Hazardous"
+
+# Get AQI statuses for min, avg, and max pollutant levels
+    min_status = get_aqi_status(min_pollutant)
+    avg_status = get_aqi_status(avg_pollutant)
+    max_status = get_aqi_status(max_pollutant)
+
+# Final AQI status prioritizing the worst-case scenario
+    if max_status == "Hazardous":
+        aqi_status = "Hazardous"
+    elif max_status == "Very Unhealthy":
+        aqi_status = "Very Unhealthy"
+    elif max_status == "Unhealthy":
+        aqi_status = "Unhealthy"
+    elif avg_status == "Unhealthy for Sensitive Groups":
+        aqi_status = "Unhealthy for Sensitive Groups"
+    elif avg_status == "Moderate":
+        aqi_status = "Moderate"
+    else:
+        aqi_status = "Good"
     
     return jsonify({
     "Minimum Pollutant Level": format(predicted_df["Minimum Pollutant level"].iloc[0], ".2f"),
