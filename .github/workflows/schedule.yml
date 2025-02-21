@@ -26,19 +26,4 @@ jobs:
       - name: Run Python Script
         run: python sample.py
 
-      - name: Configure Git
-        run: |
-          git config --global user.email "github-actions@github.com"
-          git config --global user.name "GitHub Actions"
-          git remote set-url origin https://x-access-token:${{ secrets.HUB_TOKEN }}@github.com/${{ github.repository }}.git
-
-      - name: Commit and push updated model
-        run: |
-          git add air_quality_model.pkl scaler.pkl
-          if ! git diff-index --quiet HEAD; then
-            git commit -m "Update air quality model and scaler"
-            git push origin main
-          else
-            echo "No changes to commit"
-        env:
-          GITHUB_TOKEN: ${{ secrets.HUB_TOKEN }}
+      
