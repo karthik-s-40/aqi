@@ -60,7 +60,7 @@ def predict():
     predicted_df = pd.DataFrame(prediction, columns=att)
     avg_pollutant = predicted_df["Average Pollutant level"].iloc[0]
     
-    aqi_status = "Unhealthy" if avg_pollutant > 100 else "Satisfactory" if avg_pollutant >= 51 else "Healthy"
+    aqi_status = "Unhealthy" if  format(predicted_df["Maximum Pollutant level"].iloc[0], ".2f") > 100 else "Satisfactory" if format(predicted_df["Minimum Pollutant level"].iloc[0], ".2f") else "Healthy"
     
     return jsonify({
     "Minimum Pollutant Level": format(predicted_df["Minimum Pollutant level"].iloc[0], ".2f"),
