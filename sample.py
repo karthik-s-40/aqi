@@ -93,16 +93,16 @@ try:
     with open("air_quality_model.pkl", "wb") as f:
         pickle.dump(best_xgb, f)
     
-        # Save Scaler
+    # Save Scaler
     joblib.dump(sc, "scaler.pkl")
 
+    # Git commands
     os.system("git config --global user.email 'github-actions@github.com'")
     os.system("git config --global user.name 'GitHub Actions'")
     os.system('git add "air_quality_model.pkl" "scaler.pkl"')  # Enclose filenames in quotes
     os.system('git commit -m "Update air quality model"')
     os.system("git push origin main")
 
-    
 except Exception as e:
     print(f"An error occurred: {e}")
     exit(1)

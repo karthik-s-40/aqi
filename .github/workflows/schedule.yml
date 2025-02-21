@@ -10,7 +10,7 @@ on:
 jobs:
   run-script:
     runs-on: ubuntu-latest
- 
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
@@ -26,16 +26,4 @@ jobs:
       - name: Run Python Script
         run: python sample.py
 
-      - name: Configure Git
-        run: |
-          git config --global user.email "github-actions@github.com"
-          git config --global user.name "GitHub Actions"
-          git remote set-url origin https://x-access-token:${{ secrets.HUB_TOKEN }}@github.com/${{ github.repository }}.git
-
-      - name: Commit and push updated model
-        run: |
-          git add air_quality_model.pkl scaler.pkl
-          git commit -m "Update air quality model and scaler"
-          git push origin main
-        env:
-          GITHUB_TOKEN: ${{ secrets.HUB_TOKEN }}
+      
