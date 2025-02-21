@@ -3,6 +3,8 @@ from geopy.geocoders import Nominatim
 import numpy as np
 import pandas as pd
 import joblib
+import xgboost as xgb
+
 
 app = Flask(__name__, static_folder='static', template_folder='templates')
 
@@ -24,9 +26,19 @@ pollutid = {
     'SO2': 6, 'SULFUR DIOXIDE': 6
 }
 
-# Load the trained model and scaler
-model = joblib.load("air_quality_model.pkl")
-sc = joblib.load("scaler.pkl")
+# Load the old model
+old_model = joblib.load("air_quality_model.pkl")
+
+# Extract the actual XGBoost model
+xgb_model = old_model.estimators_[0]  # Extract the first XGBoost estimator
+
+# Save in XGBoost format
+xgb_model.save_model("air_quality_model.json")
+
+
+model = xgb.Booster()
+model.load_model("air_quality_model.json")
+
 
 @app.route("/predict", methods=["POST"])
 def predict():
